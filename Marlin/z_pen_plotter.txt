@@ -1,0 +1,54 @@
+Config
+
+#define MOTHERBOARD BOARD_CREALITY_V422
+#define SERIAL_PORT 1
+#define BAUDRATE 115200
+#define CUSTOM_MACHINE_NAME "Z Pen Plotter"
+
+//#define E0_DRIVER_TYPE A4988
+
+#define EXTRUDERS 0
+
+#define POLARGRAPH
+#define POLARGRAPH_MAX_BELT_LEN  1835.0 
+
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 80}
+#define DEFAULT_MAX_FEEDRATE          {90*60, 90*60, 90*60 }
+#define DEFAULT_MAX_ACCELERATION      { 40*60, 40*60, 40*60 }
+#define CLASSIC_JERK
+
+
+#define X_BED_SIZE 1280
+#define Y_BED_SIZE 1280
+
+#define X_MIN_POS 0
+#define Y_MIN_POS 0
+#define Z_MIN_POS 0
+#define X_MAX_POS X_BED_SIZE
+#define Y_MAX_POS Y_BED_SIZE
+
+
+#define BED_CENTER_AT_0_0
+
+#define MANUAL_X_HOME_POS 0
+#define MANUAL_Y_HOME_POS 0
+#define MANUAL_Z_HOME_POS 0
+
+#define EEPROM_SETTINGS     // Persistent storage with M500 and M501
+
+#define SDSUPPORT
+
+#define FAN_SOFT_PWM
+
+#define NUM_SERVOS 1
+#define DEACTIVATE_SERVOS_AFTER_MOVE
+
+
+
+
+
+Config Adv
+#define AXIS_RELATIVE_MODES { false, false, false }
+
+#define MICROSTEP_MODES { 16, 16, 16 } // [1,2,4,8,16]
+
