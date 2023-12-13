@@ -22,8 +22,6 @@
 
 #include "../gcode.h"
 #include "../../module/motion.h"
-#include "../../module/servo.h"
-#include "../../module/planner.h"
 
 #include "../../MarlinCore.h"
 
@@ -49,37 +47,7 @@ extern xyze_pos_t destination;
 void GcodeSuite::G0_G1(TERN_(HAS_FAST_MOVES, const bool fast_move/*=false*/)) {
   if (!MOTION_CONDITIONS) return;
   
-  if (parser.seenval('Z') != current_position.z) {
-    #if HAS_SERVOS
-    if (parser.seenval('Z') < current_position.z ) {
-      const int16_t t = constrain(50, 0, 10000);
-      const int16_t servoNum = constrain(0, 0, 10000);
-      const int16_t anew = constrain(50, 0, 10000);
-      const int aold = servo[servoNum].read();
-      millis_t now = millis();
-      const millis_t start = now, end = start + t;
-      while (PENDING(now, end)) {
-        safe_delay(50);
-        now = _MIN(millis(), end);
-        servo[servoNum].move(LROUND(aold + (anew - aold) * (float(now - start) / t)));
-      }
-      servo[servoNum].move(50);
-    } else {
-      const int16_t t = constrain(100, 0, 10000);
-      const int16_t servoNum = constrain(0, 0, 10000);
-      const int16_t anew = constrain(90, 0, 10000);
-      const int aold = servo[servoNum].read();
-      millis_t now = millis();
-      const millis_t start = now, end = start + t;
-      while (PENDING(now, end)) {
-        safe_delay(50);
-        now = _MIN(millis(), end);
-        servo[servoNum].move(LROUND(aold + (anew - aold) * (float(now - start) / t)));
-      }
-      servo[servoNum].move(90);
-    }
-  }
-  #endif  //HAS_SERVOS
+  
 
   TERN_(FULL_REPORT_TO_HOST_FEATURE, set_and_report_grblstate(M_RUNNING));
 
